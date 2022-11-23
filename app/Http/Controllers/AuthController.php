@@ -26,7 +26,7 @@ class AuthController extends Controller
      */
     public function __construct()
     {
-        $this->middleware('auth:api', ['except' => ['login', 'register','buscaCorreo','update']]);
+        $this->middleware('auth:api', ['except' => ['login', 'register']]);
     }
 
     
@@ -36,23 +36,18 @@ class AuthController extends Controller
             'email' => 'required|email',
             'password' => 'required|string|min:8',
         ]);
-
         if ($validator->fails()) {
             return response()->json($validator->errors(), 422);
         }
-
         if (! $token = auth()->attempt($validator->validated())) {
             return response()->json(['error' => 'Unauthorized'], 401);
         }
-
         $user = auth()->user();
         // if($user->email_verified_at == NULL){
         //     return response()->json(['message'=>'Email no verificado, Confirme su correo electrónico',
         //     'err'=>'err'],  Response::HTTP_NOT_FOUND);
         // }
             
-
-        
         // // auth()->user()->generateCode();
         // //   return response()->json(['message'=>'El usuario si existe'],201) ;
 
@@ -112,11 +107,9 @@ class AuthController extends Controller
         $user = User::create(array_merge(
             $validator->validate(), 
              ['password' => bcrypt($request->password),
-              'rol' =>'Usuario'
+              'rol_id' =>'3'
              ]
         ));
-
-
 
         return response()->json([
             'message' =>'usuario registrado exitosamente!',

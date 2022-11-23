@@ -49,14 +49,7 @@ Route::group([
 
     Route::post('update', 'AuthController@update');
 
-    Route::get('/{email}', 'AuthController@buscaCorreo');
-
-    Route::post('/reset-password-request', [PasswordResetRequestController::class, 'sendPasswordResetEmail']);
-    Route::post('/change-password', [ChangePasswordController::class, 'passwordResetProcess']);
-
-
-// flutter api
-Route::post('newRegistro2', 'AuthController@newRegistro2');
+    // Route::get('/{email}', 'AuthController@buscaCorreo');
 });
 
 
