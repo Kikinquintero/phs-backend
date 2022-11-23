@@ -21,7 +21,7 @@ class CreateUsersTable extends Migration
             $table->string('phone')->nullable();
             $table->string('email')->unique();
             $table->string('password');
-
+            $table->integer('activo')->nullable();
             $table->integer('rol_id')->unsigned();        
             $table->foreign('rol_id')->references('id')->on('rols')->onDelete('cascade');
 
